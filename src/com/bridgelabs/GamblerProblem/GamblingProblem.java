@@ -1,8 +1,9 @@
 package com.bridgelabs.GamblerProblem;
+import java.util.Scanner;
 
 public class GamblingProblem {
 
-    static int STAKE = 100;
+    static final int STAKE = 100;
     static int PER_DAY_BET = 1;
     static int win = 1;
     static int daysWon=0;
@@ -17,11 +18,10 @@ public class GamblingProblem {
     static int lostMax=0;
     static int luckyDay;
     static int unluckyDay;
+    static int month =1;
 
 
-
-    public static void main(String[] args) {
-        System.out.println("Welcome to Gambling Simulator");
+    public static void game(){
         for (int day =1; day<=DAYS_IN_MONTH;day++) {
             dailyStake=STAKE;
             while (dailyStake < MAX_WIN_PER_DAY && dailyStake > MAX_LOSS_PER_DAY) {
@@ -30,7 +30,6 @@ public class GamblingProblem {
                     dailyStake++;
                 } else {
                     dailyStake--;
-
                 }
             }
             if(dailyStake>STAKE) {
@@ -53,15 +52,40 @@ public class GamblingProblem {
                 System.out.println("Lost on day "+day +" is "+ (STAKE-dailyStake));
                 daysLost++;
             }
-
         }
+    }
+    static void continueGame(){
+        while(true) {
+            System.out.println("Total amount won in 20 days is "+ totalAmountWonFor20Day);
+            System.out.println("Total amount lost in 20 days is "+ totalAmountLostFor20Day);
+            System.out.println("No of days won is: "+ daysWon);
+            System.out.println("No of days Lost is: "+ daysLost);
+            System.out.println("luckiest day is day " +luckyDay);
+            System.out.println("Unlukiest day is day " +unluckyDay);
+            int totalProfitLoss = totalAmountWonFor20Day + totalAmountLostFor20Day;
+            System.out.println("Total Profit or loss in month "+month +" is "+ totalProfitLoss);
+            month++;
+            if (totalProfitLoss >= 100) {
+                System.out.println("Eligible to continue for next month");
+                System.out.println("Do you want to continue(Y/y)");
+                Scanner scr = new Scanner(System.in);
+                char option = scr.next().charAt(0);
+                if (option == 'y' || option == 'Y') {
+                    game();
+                }
+                else{
+                    break;
+                }
+            } else {
+                System.out.println("You are in Loss!!!Not Eligible to continue");
+                break;
+            }
+        }
+    }
 
-        System.out.println("Total amount won in 20 days is "+ totalAmountWonFor20Day);
-        System.out.println("Total amount lost in 20 days is "+ totalAmountLostFor20Day);
-        System.out.println("No of days won is: "+ daysWon);
-        System.out.println("No of days Lost is: "+ daysLost);
-        System.out.println("luckiest day is day " +luckyDay);
-        System.out.println("Unlukiest day is day " +unluckyDay);
-
+    public static void main(String[] args) {
+        System.out.println("Welcome to Gambling Simulator");
+        game();
+        continueGame();
     }
 }
