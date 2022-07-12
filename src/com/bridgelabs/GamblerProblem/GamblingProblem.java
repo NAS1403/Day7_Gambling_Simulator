@@ -30,7 +30,6 @@ public class GamblingProblem {
                     dailyStake++;
                 } else {
                     dailyStake--;
-
                 }
             }
             if(dailyStake>STAKE) {
