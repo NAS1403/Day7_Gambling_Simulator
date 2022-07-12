@@ -9,14 +9,16 @@ public class GamblingProblem {
     
     public static void main(String[] args) {
         System.out.println("Welcome to Gambling Simulator");
-        int result = (int)(Math.random()*10)%2;
-        if (result==win){
-            DAILY_STAKE++;
-            System.out.println("Won");
-        }
-        else{
-            DAILY_STAKE--;
-            System.out.println("lost");
+        while(DAILY_STAKE<150 && DAILY_STAKE>50){
+            int result = (int)(Math.random()*10)%2;
+            if (result==win){
+                DAILY_STAKE++;
+                System.out.println("Won");
+            }
+            else{
+                DAILY_STAKE--;
+                System.out.println("lost");
+            }
         }
         System.out.println(DAILY_STAKE  );
 
