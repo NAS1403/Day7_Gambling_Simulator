@@ -2,36 +2,55 @@ package com.bridgelabs.GamblerProblem;
 
 public class GamblingProblem {
 
-    static int DAILY_STAKE = 100;
+    static int STAKE = 100;
     static int PER_DAY_BET = 1;
     static int win = 1;
     static int daysWon=0;
     static int daysLost=0;
     static int totalAmountWonFor20Day=0;
     static int totalAmountLostFor20Day=0;
+    static int DAYS_IN_MONTH =20;
+    static int dailyStake;
+    static int MAX_WIN_PER_DAY=150;
+    static int MAX_LOSS_PER_DAY=50;
+    static int wonMax=0;
+    static int lostMax=0;
+    static int luckyDay;
+    static int unluckyDay;
+
 
 
     public static void main(String[] args) {
         System.out.println("Welcome to Gambling Simulator");
-        for (int day =1; day<=20;day++) {
-            DAILY_STAKE=100;
-            while (DAILY_STAKE < 150 && DAILY_STAKE > 50) {
+        for (int day =1; day<=DAYS_IN_MONTH;day++) {
+            dailyStake=STAKE;
+            while (dailyStake < MAX_WIN_PER_DAY && dailyStake > MAX_LOSS_PER_DAY) {
                 int result = (int) (Math.random() * 10) % 2;
                 if (result == win) {
-                    DAILY_STAKE++;
+                    dailyStake++;
                 } else {
-                    DAILY_STAKE--;
+                    dailyStake--;
 
                 }
             }
-            if(DAILY_STAKE>100) {
+            if(dailyStake>STAKE) {
                 totalAmountWonFor20Day+=50;
-                System.out.println("Won on day "+day + " is "+ (DAILY_STAKE-100));
+
+                if (dailyStake > wonMax) {
+                    wonMax = dailyStake;
+                    luckyDay = day;
+                }
+
+                System.out.println("Won on day "+day + " is "+ (dailyStake-STAKE));
                 daysWon++;
             }
             else {
                 totalAmountLostFor20Day-=50;
-                System.out.println("Lost on day "+day +" is "+ (100-DAILY_STAKE));
+                if (dailyStake > lostMax) {
+                    lostMax = dailyStake;
+                    unluckyDay = day;
+                }
+                System.out.println("Lost on day "+day +" is "+ (STAKE-dailyStake));
                 daysLost++;
             }
 
@@ -41,6 +60,8 @@ public class GamblingProblem {
         System.out.println("Total amount lost in 20 days is "+ totalAmountLostFor20Day);
         System.out.println("No of days won is: "+ daysWon);
         System.out.println("No of days Lost is: "+ daysLost);
+        System.out.println("luckiest day is day " +luckyDay);
+        System.out.println("Unlukiest day is day " +unluckyDay);
 
     }
 }
