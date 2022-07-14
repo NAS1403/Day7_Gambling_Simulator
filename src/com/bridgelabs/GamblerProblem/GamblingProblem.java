@@ -8,8 +8,8 @@ public class GamblingProblem {
     static int win = 1;
     static int daysWon=0;
     static int daysLost=0;
-    static int totalAmountWonFor20Day=0;
-    static int totalAmountLostFor20Day=0;
+    static int totalAmountWon=0;
+    static int totalAmountLost=0;
     static int DAYS_IN_MONTH =20;
     static int dailyStake;
     static int MAX_WIN_PER_DAY=150;
@@ -33,7 +33,7 @@ public class GamblingProblem {
                 }
             }
             if(dailyStake>STAKE) {
-                totalAmountWonFor20Day+=50;
+                totalAmountWon+=50;
 
                 if (dailyStake > wonMax) {
                     wonMax = dailyStake;
@@ -44,7 +44,7 @@ public class GamblingProblem {
                 daysWon++;
             }
             else {
-                totalAmountLostFor20Day-=50;
+                totalAmountLost-=50;
                 if (dailyStake > lostMax) {
                     lostMax = dailyStake;
                     unluckyDay = day;
@@ -56,13 +56,13 @@ public class GamblingProblem {
     }
     static void continueGame(){
         while(true) {
-            System.out.println("Total amount won in 20 days is "+ totalAmountWonFor20Day);
-            System.out.println("Total amount lost in 20 days is "+ totalAmountLostFor20Day);
+            System.out.println("Total amount won in  is "+ totalAmountWon);
+            System.out.println("Total amount lost in  is "+ totalAmountLost);
             System.out.println("No of days won is: "+ daysWon);
             System.out.println("No of days Lost is: "+ daysLost);
             System.out.println("luckiest day is day " +luckyDay);
             System.out.println("Unlukiest day is day " +unluckyDay);
-            int totalProfitLoss = totalAmountWonFor20Day + totalAmountLostFor20Day;
+            int totalProfitLoss = totalAmountWon + totalAmountLost;
             System.out.println("Total Profit or loss in month "+month +" is "+ totalProfitLoss);
             month++;
             if (totalProfitLoss >= 100) {
