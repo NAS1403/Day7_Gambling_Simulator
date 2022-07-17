@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class GamblingProblem {
 
     static final int STAKE = 100;
-    static int PER_DAY_BET = 1;
     static int win = 1;
     static int daysWon=0;
     static int daysLost=0;
@@ -65,7 +64,7 @@ public class GamblingProblem {
             int totalProfitLoss = totalAmountWon + totalAmountLost;
             System.out.println("Total Profit or loss in month "+month +" is "+ totalProfitLoss);
             month++;
-            if (totalProfitLoss >= 100) {
+            if (totalProfitLoss > 0) {
                 System.out.println("Eligible to continue for next month");
                 System.out.println("Do you want to continue(Y/y)");
                 Scanner scr = new Scanner(System.in);
